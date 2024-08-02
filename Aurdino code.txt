@@ -1,0 +1,56 @@
+#include<LiquidCrystal.h>
+LiquidCrystal lcd(7,6,5,4,3,2);
+const int trigPin = 9;
+const int echoPin = 10;
+const int buzzer =11;
+int ledPin1=12;
+int ledPin2=11;
+long duration;
+int distance;
+void setup()
+{
+lcd.begin(16,2);
+ pinMode(buzzer,OUTPUT);
+pinMode(ledPin1,OUTPUT);
+pinMode(ledPin2,OUTPUT);
+pinMode(trigPin,OUTPUT);
+pinMode(echoPin,INPUT);
+Serial.begin(9600);
+}
+void loop( )
+{
+digitalWrite(trigPin,LOW);
+delayMicroseconds(2);
+digitalWrite(trigPin,HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin,LOW);
+10
+ duration=pulseIn(echoPin,HIGH);
+distance=duration*0.034/2
+ if(distance>=1 and distance<20)
+{
+digitalWrite(ledPin1,HIGH);
+digitalWrite(ledPin2,LOW);
+ digitalWrite(buzzer,HIGH);
+lcd.setCursor(1,1);
+lcd.print("Distance ");
+lcd.print(distance);
+lcd.setCursor(12,1);
+lcd.print(" ");
+delay(10);
+ }
+else if(distance>=20)
+{
+digitalWrite(ledPin1,LOW);
+ digitalWrite(buzzer,LOW);
+digitalWrite(ledPin2,HIGH);
+lcd.setCursor(1,1);
+lcd.print("Distance ");
+lcd.print(distance);
+lcd.setCursor(12,1);
+lcd.print(" ");
+delay(10);
+}
+Serial.print(“Distance”);
+Serial.println(distance);
+}
